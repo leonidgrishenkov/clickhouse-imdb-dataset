@@ -1,0 +1,64 @@
+-- sqlfluff:dialect:clickhouse
+
+INSERT INTO imdb.actors
+SELECT *
+FROM
+	s3(
+		'https://datasets-documentation.s3.eu-west-3.amazonaws.com/imdb/imdb_ijs_actors.tsv.gz',
+		'TSVWithNames'
+	)
+SETTINGS schema_inference_make_columns_nullable = 2
+;
+
+INSERT INTO imdb.directors
+SELECT *
+FROM
+	s3(
+		'https://datasets-documentation.s3.eu-west-3.amazonaws.com/imdb/imdb_ijs_directors.tsv.gz',
+		'TSVWithNames'
+	)
+SETTINGS schema_inference_make_columns_nullable = 2
+;
+
+INSERT INTO imdb.genres
+SELECT *
+FROM
+	s3(
+		'https://datasets-documentation.s3.eu-west-3.amazonaws.com/imdb/imdb_ijs_movies_genres.tsv.gz',
+		'TSVWithNames'
+	)
+SETTINGS schema_inference_make_columns_nullable = 2
+;
+
+INSERT INTO imdb.movie_directors
+SELECT *
+FROM
+	s3(
+		'https://datasets-documentation.s3.eu-west-3.amazonaws.com/imdb/imdb_ijs_movies_directors.tsv.gz',
+		'TSVWithNames'
+	)
+SETTINGS schema_inference_make_columns_nullable = 2
+;
+
+INSERT INTO imdb.movies
+SELECT *
+FROM
+	s3(
+		'https://datasets-documentation.s3.eu-west-3.amazonaws.com/imdb/imdb_ijs_movies.tsv.gz',
+		'TSVWithNames'
+	)
+SETTINGS schema_inference_make_columns_nullable = 2
+;
+
+INSERT INTO imdb.roles (actor_id, movie_id, role)
+SELECT
+	actor_id,
+	movie_id,
+	role
+FROM
+	s3(
+		'https://datasets-documentation.s3.eu-west-3.amazonaws.com/imdb/imdb_ijs_roles.tsv.gz',
+		'TSVWithNames'
+	)
+SETTINGS schema_inference_make_columns_nullable = 2
+;
