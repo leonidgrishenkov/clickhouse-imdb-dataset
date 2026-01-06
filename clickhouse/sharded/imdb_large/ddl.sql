@@ -11,18 +11,18 @@ ORDER BY (id, first_name, last_name, gender);
 
 CREATE TABLE imdb_large.actors ON CLUSTER '{cluster}'
 AS imdb_large.actors_local
-ENGINE = Distributed('{cluster}', 'imdb_large', 'actors_local', rand());
+ENGINE = Distributed('{cluster}', 'imdb_large', 'actors_local', intHash64(id));
 
 
 CREATE TABLE imdb_large.roles_local ON CLUSTER '{cluster}'
 (
     created_at DateTime DEFAULT now(),
-    actor_id   UInt32,
-    movie_id   UInt32,
-    role       String
+    actor_id   UInt32 CODEC(ZSTD(10)),
+    movie_id   UInt32 CODEC(ZSTD(10)),
+    role       String CODEC(ZSTD(10))
 ) ENGINE = ReplicatedMergeTree
 ORDER BY (actor_id, movie_id);
 
 CREATE TABLE imdb_large.roles ON CLUSTER '{cluster}'
 AS imdb_large.roles_local
-ENGINE = Distributed('{cluster}', 'imdb_large', 'roles_local', rand());
+ENGINE = Distributed('{cluster}', 'imdb_large', 'roles_local', intHash64(actor_id));
