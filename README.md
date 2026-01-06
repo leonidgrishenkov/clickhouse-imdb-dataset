@@ -6,8 +6,11 @@ Database schema:
 Execute DDL and DML scripts:
 
 ```sh
-docker cp ./clickhouse/ clickhouse-01:/tmp/ \
-    && docker exec -it clickhouse-01 ch client --interactive --queries-file /tmp/clickhouse/sharded/ddl.sql /tmp/clickhouse/common/dml.sql
+docker cp ./clickhouse/ clickhouse-01:/tmp/
+
+docker exec -it clickhouse-01 ch client --interactive --queries-file /tmp/clickhouse/sharded/imdb/ddl.sql /tmp/clickhouse/sharded/imdb/dml.sql
+
+docker exec -it clickhouse-01 ch client --interactive --queries-file /tmp/clickhouse/sharded/imdb_large/ddl.sql /tmp/clickhouse/sharded/imdb_large/dml.sql
 ```
 
 # Queries
