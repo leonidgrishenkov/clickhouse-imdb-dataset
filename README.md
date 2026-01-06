@@ -13,6 +13,8 @@ docker exec -it clickhouse-01 ch client --interactive --queries-file /tmp/clickh
 docker exec -it clickhouse-01 ch client --interactive --queries-file /tmp/clickhouse/sharded/imdb_large/ddl.sql /tmp/clickhouse/sharded/imdb_large/dml.sql
 ```
 
+`imdb_large` database contains tables mentioned in this guide: https://clickhouse.com/blog/clickhouse-fully-supports-joins-hash-joins-part2
+
 # Queries
 
 Execute the following query to compute a summary of each actor, ordered by the most movie appearances, and to confirm the data was loaded successfully:
