@@ -1,4 +1,6 @@
-This repo contains DDL and DML queries for IMDb dataset taken from [Clickhouse DBT Integration Guide](https://clickhouse.com/docs/integrations/dbt/guides)
+This repo contains DDL and DML queries for IMDb dataset taken from
+[Clickhouse DBT Integration Guide](https://clickhouse.com/docs/integrations/dbt/guides).
+
 Database schema:
 
 ![schema](.github/images/schema.png)
@@ -13,11 +15,13 @@ docker exec -it clickhouse-01 ch client --interactive --queries-file /tmp/clickh
 docker exec -it clickhouse-01 ch client --interactive --queries-file /tmp/clickhouse/sharded/imdb_large/ddl.sql /tmp/clickhouse/sharded/imdb_large/dml.sql
 ```
 
-`imdb_large` database contains tables mentioned in this guide: https://clickhouse.com/blog/clickhouse-fully-supports-joins-hash-joins-part2
+`imdb_large` database contains tables mentioned in
+[this guide](https://clickhouse.com/blog/clickhouse-fully-supports-joins-hash-joins-part2).
 
 # Queries
 
-Execute the following query to compute a summary of each actor, ordered by the most movie appearances, and to confirm the data was loaded successfully:
+Execute the following query to compute a summary of each actor, ordered by the most movie appearances, and to confirm
+the data was loaded successfully:
 
 ```sql
 SELECT id,
@@ -46,4 +50,3 @@ GROUP BY id
 ORDER BY num_movies DESC
 LIMIT 5;
 ```
-
